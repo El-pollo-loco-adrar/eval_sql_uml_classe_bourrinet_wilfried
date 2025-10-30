@@ -36,27 +36,27 @@ CONSTRAINT check_book_description CHECK (char_length(`description`) > 0
 -- Requêtes de mise à jour
 INSERT INTO category (`name`) VALUE ('Roman'),('SF'),('fantastique'),('biopic'),('thriller');
 
+INSERT INTO book (title, `description`, publication_date, author, id_category) VALUES
+('Le couscous du futur', "Oui.", "2025-10-30", "Harry Potter", 1),
+('La chaise en slip', "Pourquoi pas.", "2024-11-10", "Hermione Granger", 2),
+('Biscotte de l’enfer', "C’est chaud.", "2014-02-25", "Ron Weasley", 3),
+('Le poisson sans nom', "Il flotte… un peu.", "1999-01-05", "Remus Lupin", 4),
+('Crabe président', "Il dirige bien.", "2025-01-01", "Sirius Black", 5),
+('La porte triste', "Elle ferme son cœur.", "2025-02-01", "Albus Perceval Wulfric Brian Dumbledore", 1),
+('Un ancien président en prison', "True story.", "2025-03-01", "Minerva McGonagall", 2),
+('Le pull qui aboie', "Woof.", "2025-04-01", "Ginny Weasley", 3),
+('Le sandwich invisible', "Tu le vois ?", "2025-05-01", "Lord Voldemort", 4),
+('Table 3000', "Elle sait tout.", "2025-06-01", "Tom Jedusor", 5),
+('Le nuage en grève', "Il pleut plus.", "2025-07-01", "Hagrid the Best", 1),
+('Papillon de l’espace', "Flap flap.", "2025-08-01", "Hedwige RIP", 2),
+('Chaussette suprême', "Elle juge.", "2025-09-01", "Oncle Vernon", 3),
+('La bouilloire maudite', "Elle siffle… encore.", "2025-10-10", "Tante Marge", 4),
+('Le pigeon existentiel', "Pourquoi voler ?", "2025-11-08", "Neville Londubas", 5);
+
 INSERT INTO users (firstname, lastname, email, `password`) VALUES
 ('Steven', 'Spielberg', 's.spielberg@bdd.com', 'mdp123'),
 ('Steven', 'Gerrard', 's.gerrard@bdd.com', 'mdp456'),
 ('Steven', 'Seagal', 's.seagal@bdd.com', 'mdp789');
-
-INSERT INTO book (title, `description`, publication_date, author, id_category) VALUES
-('Livre 1', "Le titre n'est pas ouf 1", "2025-10-30", "Harry Potter", 1),
-('Livre 2', "Le titre n'est pas ouf 2", "2024-11-10", "Hermione Granger", 2),
-('Livre 3', "Le titre n'est pas ouf 3", "2014-02-25", "Ron Weasley", 3),
-('Livre 4', "Le titre n'est pas ouf 4", "1999-01-05", "Remus Lupin", 4),
-('Livre 5', "Le titre n'est pas ouf 5", "2025-01-01", "Sirius Black", 5),
-('Livre 6', "Le titre n'est pas ouf 6", "2025-02-01", "Albus Perceval Wulfric Brian Dumbledore", 1),
-('Livre 7', "Le titre n'est pas ouf 7", "2025-03-01", "Minerva McGonagall", 2),
-('Livre 8', "Le titre n'est pas ouf 8", "2025-04-01", "Ginny Weasley", 3),
-('Livre 9', "Le titre n'est pas ouf 9", "2025-05-01", "Lord Voldemort", 4),
-('Livre 10', "Le titre n'est pas ouf 10", "2025-06-01", "Tom Jedusor", 5),
-('Livre 11', "Le titre n'est pas ouf 11", "2025-07-01", "Hagrid the Best", 1),
-('Livre 12', "Le titre n'est pas ouf 12", "2025-08-01", "Hedwige RIP", 2),
-('Livre 13', "Le titre n'est pas ouf 13", "2025-09-01", "Oncle Vernon", 3),
-('Livre 14', "Le titre n'est pas ouf 14", "2025-10-10", "Tante Marge", 4),
-('Livre 15', "Le titre n'est pas ouf 15", "2025-11-08", "Neville Londubas", 5);
 
 UPDATE book SET id_users = 1
 WHERE id_book IN (1,2,3,4,5);
@@ -67,12 +67,12 @@ WHERE id_book IN (11,12,13,14,15);
 
 
 -- Requêtes de création de compte
-CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'azerty';
-GRANT ALL PRIVILEGES ON books . * TO 'admin'@'localhost';
-
 CREATE USER 'Utilisateur'@'localhost' IDENTIFIED BY 'azertyUser';
 GRANT INSERT, UPDATE, DELETE ON books . users TO 'Utilisateur'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON books . book TO 'Utilisateur'@'localhost';
+
+CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'azerty';
+GRANT ALL PRIVILEGES ON books . * TO 'admin'@'localhost';
 
 FLUSH PRIVILEGES;
 
